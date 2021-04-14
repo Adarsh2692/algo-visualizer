@@ -1,0 +1,273 @@
+<html>
+
+<head>
+    <title>
+        Algo visualizer
+    </title>
+    <style>
+        .dbox {
+            border-style: solid;
+            border-width: 3px;
+            height: 600px;
+            margin: auto;
+            width: 600px;
+            margin-top: 1em;
+            background-color: white;
+            transform: rotate(180deg) scaleX(-1);
+        }
+
+        .cover {
+            border-style: solid;
+            border-width: 3px;
+            height: 640px;
+            margin: auto;
+            width: 620px;
+            background-color: grey;
+        }
+
+        .but2 {
+            display: block;
+            margin-top: 10px;
+            margin-left: 10px;
+            background-color: goldenrod;
+            width: 250px;
+            height: 40px;
+            font-weight: bolder;
+            font-size: large;
+        }
+
+        .but1 {
+            background-color: goldenrod;
+            width: 250px;
+            height: 40px;
+            font-weight: bolder;
+            font-size: large;
+            margin-top: 10px;
+        }
+
+        .r1 {
+            margin-top: 40px;
+        }
+
+        .but2:hover,
+        .but1:hover {
+            box-shadow: 0 6px 8px 0 rgba(141, 108, 108, 0.24),
+                0 8px 25px 0 rgba(141, 108, 108, 0.24);
+        }
+
+        .but2:active,
+        .but1:active {
+            background-color: goldenrod;
+            box-shadow: 0 5px #666;
+            transform: translateY(2px);
+        }
+
+        .ib {
+            margin: auto;
+            width: 250px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="column c2">
+        <div class="row"><input id="inputbox1" class="ib" type="string" placeholder="Enter array">
+            <button class="but1" onclick="createarr(0)">Create array</button></div>
+        <div><input id="inputbox2" class="ib" type="number" placeholder="Enter array size">
+            <button class="but1" onclick="createarr(1)">Create array</button></div>
+    </div>
+    <div class="row" style="display: flex;align-items: center;justify-content: center;">
+        <button class="but2" id="call" onclick="bubbleSort()">Bubble Sort</button>
+        <button class="but2" id="call" onclick="selectionSort()">Selection Sort</button>
+        <button class="but2" id="call" onclick="insertionSort()">Insertion Sort</button>
+        <button class="but2" id="call" onclick="quickSort()">Quick Sort</button>
+    </div>
+    <div class="column">
+        <div class="row r1">
+            <div class="cover">
+                <div class="dbox" id="displaybox">
+                </div>
+                <label>Speed</label>
+                <input id="speedrange" type="range" min="1" max="200">
+            </div>
+        </div>
+    </div>
+    <div style="height:30px"></div>
+</body>
+
+<script>
+    let h = [];
+    let bars = [];
+    let w;
+    let a = [];
+    let n;
+
+    function createarr(r) {
+        h.length = 0;
+        bars.length = 0;
+
+        // let n=document.getElementById("inputbox2").value;
+        // let a = document.getElementById("inp1").value.trim().split(" ");
+        // console.log(a);
+
+
+        let obj = document.getElementById("displaybox");
+        obj.innerHTML = "";
+
+        if (r == 0) {
+            if (a = document.getElementById("inputbox1").value.trim().split(" ").map(Number));
+            n = a.length;
+        } else {
+            n = document.getElementById("inputbox2").value;
+            for (i = 0; i < n; i++) {
+                let p = Math.floor((Math.random() * 40) + 1);
+                a[i] = p;
+            }
+        }
+
+        let max = Math.max(...a);
+        for (let i = 0; i < n; i++) {
+            h[i] = (a[i] * 600) / max;
+            console.log(h[i]);
+            w = 600 / n;
+            bars[i] = document.createElement("div");
+            obj.appendChild(bars[i]);
+
+            bars[i].style.backgroundColor = "red";
+            bars[i].style.margin = "0.5px";
+            bars[i].style.width = w;
+            bars[i].style.height = h[i];
+        }
+        document.getElementById("displaybox").style.alignItems = "flex-start";
+        document.getElementById("displaybox").style.display = "flex";
+    }
+
+    let count = 0;
+
+    function bubbleSort() {
+        count = 0;
+        let i, j
+
+        for (i = 0; i < n - 1; i++) {
+            for (j = 0; j < n - i - 1; j++) {
+                colo(bars[j], h[j], "blue");
+                if (h[j] > h[j + 1]) {
+                    colo(bars[j], h[j], "blue");
+                    colo(bars[j + 1], h[j + 1], "blue");
+
+                    let t = h[j];
+                    h[j] = h[j + 1];
+                    h[j + 1] = t;
+
+                    colo(bars[j], h[j], "blue");
+                    colo(bars[j + 1], h[j + 1], "blue");
+                }
+                colo(bars[j], h[j], "red");
+            }
+            colo(bars[j], h[j], "orange");
+        }
+        colo(bars[0], h[0], "orange")
+    }
+
+    function selectionSort() {
+        count = 0;
+        let i, j
+
+        for (i = 0; i < n; i++) {
+            let min = i;
+            for (j = i + 1; j < n; j++) {
+                colo(bars[j], h[j], "blue");
+                colo(bars[min], h[min], "grey");
+                if (h[j] < h[min]) {
+                    colo(bars[min], h[min], "red");
+                    min = j;
+                }
+                colo(bars[j], h[j], "red");
+            }
+            let t = h[i];
+            h[i] = h[min];
+            h[min] = t;
+            colo(bars[i], h[i], "orange")
+            // colo(bars[j], h[j], "orange");
+        }
+    }
+
+    function insertionSort() {
+        count = 0;
+        let i, j
+
+        for (i = 0; i < n; i++) {
+            let key = h[i];
+            j = i - 1;
+            while (j >= 0 && h[j] > key) {
+                colo(bars[j], h[j], "blue")
+                colo(bars[j + 1], h[j + 1], "blue")
+                h[j + 1] = h[j];
+                colo(bars[j], h[j], "orange")
+                colo(bars[j + 1], h[j + 1], "orange")
+                j = j - 1;
+            }
+            h[j + 1] = key;
+            colo(bars[j + 1], key, "orange");
+            colo(bars[i], h[i], "orange");
+            // colo(bars[j], h[j], "orange");
+        }
+    }
+
+    let pi;
+
+    function partition(low, high) {
+        let pivot = h[high]; // pivot
+        let i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+
+        for (let j = low; j <= high - 1; j++) {
+            // If current element is smaller than the pivot
+            if (h[j] < pivot) {
+                i++; // increment index of smaller element
+                let t = h[i];
+                h[i] = h[j];
+                h[j] = t;
+                colo(bars[i], h[i], "blue")
+                colo(bars[j], h[j], "blue")
+            }
+        }
+        let t = h[i + 1];
+        h[i + 1] = h[high];
+        h[high] = t;
+        colo(bars[i + 1], h[i + 1], "yellow")
+        colo(bars[high], h[high], "yellow")
+        pi = i + 1;
+    }
+
+    function qkSort(low, high) {
+        if (low < high) {
+            /* pi is partitioning index, h[p] is now
+            at right place */
+            partition(low, high);
+
+            // Separately sort elements before
+            // partition and after partition
+            qkSort(low, pi - 1);
+            qkSort(pi + 1, high);
+        }
+    }
+
+    function quickSort() {
+        count = 0;
+        qkSort(0, n - 1);
+        for (i = 0; i < n; i++) {
+            colo(bars[i], h[i], "orange")
+        }
+    }
+
+    function colo(val, ht, col) {
+        let sp = 201 - document.getElementById("speedrange").value;
+        window.setTimeout(function () {
+            val.style.height = ht;
+            val.style.backgroundColor = col;
+        }, count += sp);
+    }
+</script>
+
+</html>

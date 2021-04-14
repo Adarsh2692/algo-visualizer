@@ -1,0 +1,145 @@
+// const create = (r) => {
+    //     console.clear();
+    //     let bars = document.getElementById("bars");
+    //     let h = bars.offsetHeight;
+    //     let w = bars.offsetWidth;
+    //     bars.innerHTML = "";
+    //     let a = [];
+    //     if (r == 0) {
+    //         a = document.getElementById("inp1").value.trim().split(" ").map(Number)
+    //     } else {
+    //         let v = document.getElementById("inp2").value.trim();
+    //         for (i = 0; i < v; i++) {
+    //             a.push(Math.floor(Math.random() * 20 + 1));
+    //         }
+    //     }
+    //     let max = Math.max(...a);
+    //     a.map((val, i) => {
+    //         let bar = document.createElement('div');
+    //         if (a.length <= 40)
+    //             bar.innerText = val;
+    //         bar.className = "bar";
+    //         bar.id = "bar" + i;
+    //         let bh = (val * 100) / max;
+    //         bar.style.height = bh + "%";
+    //         bar.style.width = w / a.length + "%";
+    //         bars.appendChild(bar);
+    //     })
+    // }
+
+    // let count = 0;
+
+    // function sortArray() {
+    //     count = 0;
+    //     let n = document.getElementById("bars").childElementCount;
+    //     for (i = 0; i < n - 1; i++) {
+    //         for (j = 0; j < n - i - 1; j++) {
+    //             let x = j + 1;
+    //             let k = document.getElementById("bar" + j);
+    //             let l = document.getElementById("bar" + x);
+    //             let sp = 200;
+    //             if (parseFloat(k.style.height) > parseFloat(l.style.height)) {
+
+    //                 let t = k.style.height;
+    //                 let p = k.innerText;
+    //                 let q = l.innerText;
+    //                 k.innerText = q;
+    //                 l.innerText = p;
+    //                 color(k, l.style.height, "red", sp)
+    //                 color(l, t, "red", sp)
+    //             }
+    //         }
+    //     }
+    //     // colo(bars[0], h[0], "orange")
+    // }
+
+    // function color(val, ht, col, sp) {
+    //     window.setTimeout(function () {
+    //         val.style.height = ht;
+    //         val.style.backgroundColor = col;
+    //     }, count += sp);
+    // }
+
+    // const swap = () => {
+    //     let count = 0;
+    //     let n = document.getElementById("bars").childElementCount;
+    //     color1 = "linear-gradient(to right, #4ddee9 0%, #7af1fa 100%)";
+    //     color2 = "linear-gradient(to right, #4d91e9 0%, #7af1fa 100%)";
+    //     for (i = 0; i < n - 1; i++) {
+    //         for (j = 0; j < n - i - 1; j++) {
+    //             let x = j + 1;
+    //             let k = document.getElementById("bar" + j);
+    //             let l = document.getElementById("bar" + x);
+    //             if (parseFloat(k.style.height) > parseFloat(l.style.height)) {
+    //                 console.log(document.getElementById("bar" + j), document.getElementById("bar" + x));
+    //                 if (!l.style.left) l.style.left = 0;
+    //                 let t = parseFloat(l.style.left) - parseFloat(k.offsetWidth);
+    //                 l.style.left = t;
+    //                 console.log(t, l.style.left);
+    //                 if (!k.style.left) k.style.left = 0;
+    //                 k.style.left = parseFloat(k.style.left) + parseFloat(k.offsetWidth);
+    //                 document.getElementById("bar" + j).id = "r";
+    //                 document.getElementById("bar" + x).id = "bar" + j;
+    //                 document.getElementById("r").id = "bar" + x;
+    //                 console.log(document.getElementById("bar" + j), document.getElementById("bar" + x));
+    //             }
+    //         }
+    //     }
+    // }
+    // console.log("0 "+document.getElementById("bar" + j).offsetLeft,document.getElementById("bar" + x).offsetLeft);
+    // console.log("heights "+(parseFloat(k.style.height) > parseFloat(l.style.height)),k.style.height ,l.style.height)
+    // console.log("1"+k.offsetLeft, l.offsetLeft);
+    // console.log("1 "+document.getElementById("bar" + j).offsetLeft,document.getElementById("bar" + x).offsetLeft,document.getElementById("bar" + j).getBoundingClientRect().width);
+    // let t=document.getElementById("bar" + j).style.width;
+    // document.getElementById("bar" + j).offsetLeft
+    // document.getElementById("bar" + j).style.left +=t+"px";
+    // document.getElementById("bar" + x).style.left -=t+"px";
+    // document.getElementById("bar" + j).id="r";
+    // document.getElementById("bar" + x).id="bar" + j;
+    // document.getElementById("r").id="bar" + x;
+    // console.log("2 "+document.getElementById("bar" + j).offsetLeft,document.getElementById("bar" + x).offsetLeft);
+    // console.log("2"+k.offsetLeft, l.offsetLeft);
+
+
+    <div>
+        <input type="text" id="inp1"><button onclick="create(0)">Create Array</button>
+        <input type="text" id="inp2"><button onclick="create(1)">Create Array</button>
+    </div>
+    <div class="main" id="main">
+        <div class="bars" id="bars">
+        </div>
+    </div>
+    <button onclick="sortArray()">Swap</button>
+
+    .main {
+            display: block;
+            width: 60vw;
+            height: 80vh;
+            margin-top: 10vh;
+            margin-left: auto;
+            margin-right: auto;
+            border: solid;
+            border-width: 0px 0px 3px 0px;
+        }
+
+        .bars {
+            width: 60vw;
+            height: 80vh;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            transform: rotate(180deg);
+            transform: rotateX(180deg);
+        }
+
+        .bar {
+            position: relative;
+            width: 100px;
+            margin: 0.5px;
+            background: linear-gradient(to right, #4d91e9 0%, #114f96 100%);
+            text-align: center;
+            font-size: 1vw;
+            transform: rotateX(180deg);
+        }
